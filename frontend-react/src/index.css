@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @layer components {
+    .judulnavlogreg {
+        @apply font-mono;
+    }
+} */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.div-bg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./src/assets/alexander-shatov-71Qk8ODIBko-unsplash.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+}
+
+.header-navlog {
+    background-color: rgb(0, 0, 22);
+}
+
+.judulnavlogreg {
+  font-family: "Curlz MT";
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+
+.form-login input {
+    border: none;
+    border-bottom: 1px solid #f06;
+    padding-inline: 4px;
+    height: 32px;
+}
+
+.welcome {
+    font-family: "Curlz MT";
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+
+.footer {
+    background-color: rgb(0, 0, 22);
+    margin-top: 85px;
+}
+
+.div-form-register {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fffa;
+    border-radius: 16px;
+    padding: 24px;
+    /* box-shadow: 0 0 16px #000d; */
+}
+
+.close {
+    position: absolute;
+    top: 29%;
+    left: 57%;
+    font-size: 24px;
+    cursor: pointer;
+    background-color: #ddd;
+}
+
+.close:hover {
+    background-color: #fff1;
+}
+
+/* Home */
+
+.header-nav {
+    border-bottom: 1px solid #0003;
+}
+
+.judul-navbar {
+    font-size: 35px;
+    font-family: "Curlz MT";
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.ul-nav a {
+    font-size: 20px;
+}
+
+.ul-nav .a-home {
+    font-size: 25px;
+}
+
+.ul-nav .a-chat {
+    font-size: 25px;
+}
+
+.div-setting {
+    position: absolute;
+    top: 50px;
+    left: 89.3%;
+    background-color: #dddd;
+    border-radius: 8px;
+    width: 90px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -7,19 +7,14 @@ import Button from "../../components/Button";
 import { useState } from "react";
 
 export default function Navlog() {
-  const [data, setData] = useState([
-    {
-      id: 1,
-      username: "trs",
-      passowrd: "2502",
-    },
-  ]);
+  // const [data, setData] = useState([]);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const [register, setRegister] = useState(false);
   const [regUsername, setRegUsername] = useState("");
   const [regPassword, setRegPassword] = useState("");
 
-  //   console.log(data);
   return (
     <>
       <header className="flex justify-between items-center px-10 py-5 header-navlog">
@@ -40,40 +35,60 @@ export default function Navlog() {
               className="flex flex-col gap-7 mt-7 form-login"
               onSubmit={(e) => {
                 e.preventDefault();
-                let found;
-                data.forEach((d) => {
-                  if (
-                    document.querySelector("#username").value === d.username
-                  ) {
-                    found = d;
+                // let found;
+                // data.forEach((d) => {
+                //   if (
+                //     document.querySelector("#username").value === d.username
+                //   ) {
+                //     found = d;
+                //   }
+                // });
+                // if (found) {
+                //   if (
+                //     document.querySelector("#password").value === found.passowrd
+                //   ) {
+                //     alert("Login Berhasil");
+                //     window.location = "/home";
+                //   } else {
+                //     alert("Password Salah");
+                //     location.reload();
+                //   }
+                // } else {
+                //   alert("Username Salah");
+                //   location.reload();
+                // }
+                fetch("http://localhost:3000/api/login", {
+                  method: "POST",
+                  headers: {
+                    "Content-type" : "application/json"
+                  },
+                  body: JSON.stringify({
+                    username,
+                    password
+                  })
+
+                }).then(async (response) => {
+                  if(response.ok) {
+                    alert(await response.text());
+                    // window.location = "/home";
                   }
-                });
-                if (found) {
-                  if (
-                    document.querySelector("#password").value === found.passowrd
-                  ) {
-                    alert("Login Berhasil");
-                    window.location = "/home";
-                  } else {
-                    alert("Password Salah");
-                    location.reload();
+                  else {
+                    alert(await response.text());
+                    // location.reload();
                   }
-                } else {
-                  alert("Username Salah");
-                  location.reload();
-                }
+                })
               }}
             >
               <input
                 type="text"
                 placeholder="Username"
-                id="username"
+                onChange={(e) => setUsername(e.target.value)}
                 required
               />
               <input
                 type="text"
                 placeholder="Password"
-                id="password"
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
               <Button name="Login" />

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import MoveContent from "../../components/MoveContent";
 import Button from "../../components/Button";
 import Footer from "../../components/Footer";
 import Navabco from "../../components/Navabco";
@@ -53,9 +54,9 @@ export default function Navreg() {
               </div>
             </form>
           </div>
-          <div>
+          <div className="flex flex-col gap-5 font-serif tracking-widest mt-16">
             <p className="text-white text-7xl welcome">Welcome To</p>
-            {/* <MoveContent /> */}
+            <MoveContent />
           </div>
         </main>
         <div className="footer-register">

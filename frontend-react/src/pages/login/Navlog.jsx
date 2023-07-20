@@ -2,7 +2,7 @@ import { NavLink, Link } from "react-router-dom";
 import { MdAccountCircle } from "react-icons/md";
 import Footer from "../../components/Footer";
 import Button from "../../components/Button";
-// import MoveContent from "../../components/MoveContent";
+import MoveContent from "../../components/MoveContent";
 import { useState } from "react";
 
 export default function Navlog() {
@@ -98,9 +98,9 @@ export default function Navlog() {
               </div>
             </form>
           </div>
-          <div>
+          <div className="flex flex-col gap-5 font-serif tracking-widest mt-16">
             <p className="text-white text-7xl welcome">Welcome To</p>
-            {/* <MoveContent /> */}
+            <MoveContent />
           </div>
         </main>
         <div className="footer-login">

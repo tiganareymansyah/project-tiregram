@@ -21,9 +21,29 @@ export default function Navlog() {
         <Link to={"/"}>
           <h1 className="text-3xl text-pink-600 judulnavlogreg">TiRegram</h1>
         </Link>
-        <NavLink to={"/register"}>
-          <MdAccountCircle className="fill-pink-600 text-3xl" />
-        </NavLink>
+        <ul className="flex items-center gap-10 ">
+          <li>
+            <NavLink
+              to={"/about"}
+              className="text-pink-600 tracking-widest hover:text-white ease-in-out duration-300"
+            >
+              About
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to={"/contact"}
+              className="text-pink-600 tracking-widest hover:text-white ease-in-out duration-300"
+            >
+              Contact
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/register"}>
+              <MdAccountCircle className="fill-pink-600 text-3xl hover:fill-white ease-in-out duration-300" />
+            </NavLink>
+          </li>
+        </ul>
       </header>
       <div className="div-bg">
         <main className="flex justify-center items-center gap-52">
@@ -38,23 +58,21 @@ export default function Navlog() {
                 fetch("http://localhost:3000/api/login", {
                   method: "POST",
                   headers: {
-                    "Content-type" : "application/json"
+                    "Content-type": "application/json",
                   },
                   body: JSON.stringify({
                     username,
-                    password
-                  })
-
+                    password,
+                  }),
                 }).then(async (response) => {
-                  if(response.ok) {
+                  if (response.ok) {
                     alert(await response.text());
                     window.location = "/home";
-                  }
-                  else {
+                  } else {
                     alert(await response.text());
                     location.reload();
                   }
-                })
+                });
               }}
             >
               <input
@@ -69,7 +87,9 @@ export default function Navlog() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <Button name="Login" />
+              <div className="mt-7">
+                <Button name="Login" />
+              </div>
               <div className="flex justify-center text-xs">
                 <p>Don't have account ?</p>
                 <p
@@ -89,7 +109,9 @@ export default function Navlog() {
             {/* <MoveContent /> */}
           </div>
         </main>
-      <Footer />
+        <div className="footer-login">
+          <Footer />
+        </div>
       </div>
       {register && (
         <div>
@@ -130,7 +152,9 @@ export default function Navlog() {
                   required
                   onChange={(e) => setRegPassword(e.target.value)}
                 />
-                <Button name="Register" />
+                <div className="mt-7">
+                  <Button name="Register" />
+                </div>
               </form>
             </div>
           </div>

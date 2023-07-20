@@ -23,3 +23,10 @@ export async function loginUser(req, res) {
         res.send("Username salah");
     }
 }
+
+export async function registerUser(req, res) {
+    await client.query(
+        `INSERT INTO user_data (username, password) VALUES ('${req.body.regUsername}', '${req.body.regPassword}')`
+    );
+    res.send("Register berhasil");
+}

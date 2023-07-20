@@ -4,10 +4,10 @@ import App from './App.jsx'
 import "./index.css"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Navlog from './pages/login/Navlog.jsx';
-import Navreg from './pages/register/Navreg.jsx';
 import Home from './pages/home/Home.jsx';
 import About from './pages/about/About.jsx';
 import Contact from './pages/contact/Contact.jsx';
+import Navreg from './pages/register/Navreg.jsx';
 
 const router = createBrowserRouter([
   {

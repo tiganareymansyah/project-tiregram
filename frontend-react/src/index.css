@@ -51,30 +51,6 @@
     letter-spacing: 2px;
 }
 
-.div-form-register {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fffa;
-    border-radius: 16px;
-    padding: 24px;
-    /* box-shadow: 0 0 16px #000d; */
-}
-
-.close {
-    position: absolute;
-    top: 29%;
-    left: 57%;
-    font-size: 24px;
-    cursor: pointer;
-    background-color: #ddd;
-}
-
-.close:hover {
-    background-color: #fff1;
-}
-
 /* css about */
 
 .div-about {
@@ -110,12 +86,32 @@
     background-color: #fff;
     border-radius: 16px;
     padding: 32px 32px;
+    margin-top: 50px;
+}
+
+.img-contact {
+    width: 120px;
+    height: 120px;
+    border-radius: 70px;
+}
+
+.ul-contact a {
+    color: #00f;
+    border-bottom: 1px solid #00f;
 }
 
 .footer-contact {
     background-color: rgb(0, 0, 22);
     letter-spacing: 2px;
-    margin-top: 100px;
+    margin-top: 59px;
+}
+
+/* css register */
+
+.footer-register {
+    background-color: rgb(0, 0, 22);
+    letter-spacing: 2px;
+    margin-top: 125px;
 }
 
 /* css home */

@@ -35,28 +35,6 @@ export default function Navlog() {
               className="flex flex-col gap-7 mt-7 form-login"
               onSubmit={(e) => {
                 e.preventDefault();
-                // let found;
-                // data.forEach((d) => {
-                //   if (
-                //     document.querySelector("#username").value === d.username
-                //   ) {
-                //     found = d;
-                //   }
-                // });
-                // if (found) {
-                //   if (
-                //     document.querySelector("#password").value === found.passowrd
-                //   ) {
-                //     alert("Login Berhasil");
-                //     window.location = "/home";
-                //   } else {
-                //     alert("Password Salah");
-                //     location.reload();
-                //   }
-                // } else {
-                //   alert("Username Salah");
-                //   location.reload();
-                // }
                 fetch("http://localhost:3000/api/login", {
                   method: "POST",
                   headers: {
@@ -70,11 +48,11 @@ export default function Navlog() {
                 }).then(async (response) => {
                   if(response.ok) {
                     alert(await response.text());
-                    // window.location = "/home";
+                    window.location = "/home";
                   }
                   else {
                     alert(await response.text());
-                    // location.reload();
+                    location.reload();
                   }
                 })
               }}

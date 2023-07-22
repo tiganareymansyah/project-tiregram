@@ -27,7 +27,7 @@ export default function Navbar() {
         </form>
         <ul className="flex items-center gap-10 ul-nav">
           <li>
-            <NavLink className="a-home">
+            <NavLink to={"/home"} className="a-home">
               <LiaHomeSolid />
             </NavLink>
           </li>
@@ -57,7 +57,7 @@ export default function Navbar() {
         <div className="div-setting">
           <ul>
             <li>
-              <NavLink className="flex items-center gap-1 py-2 hover:bg-gray-300 px-2.5">
+              <NavLink to={"/profil"} className="flex items-center gap-1 py-2 hover:bg-gray-300 px-2.5">
                 <CgProfile /> Profil
               </NavLink>
             </li>

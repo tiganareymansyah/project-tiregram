@@ -4,6 +4,7 @@ import Footer from "../../components/Footer";
 import Button from "../../components/Button";
 import MoveContent from "../../components/MoveContent";
 import { useState } from "react";
+import axios from "axios";
 
 export default function Navlog() {
   const [username, setUsername] = useState("");
@@ -47,26 +48,35 @@ export default function Navlog() {
             </h1>
             <form
               className="flex flex-col gap-7 mt-7 form-login"
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
-                fetch("http://localhost:3000/api/login", {
-                  method: "POST",
-                  headers: {
-                    "Content-type": "application/json",
-                  },
-                  body: JSON.stringify({
+                // fetch("http://localhost:3000/api/login", {
+                //   method: "POST",
+                //   headers: {
+                //     "Content-type": "application/json",
+                //   },
+                //   body: JSON.stringify({
+                //     username,
+                //     password,
+                //   }),
+                // }).then(async (response) => {
+                //   if (response.ok) {
+                //     alert(await response.text());
+                //     window.location = "/home";
+                //   } else {
+                //     alert(await response.text());
+                //     location.reload();
+                //   }
+                // });
+
+                axios
+                  .post("http://localhost:3000/api/login", {
                     username,
                     password,
-                  }),
-                }).then(async (response) => {
-                  if (response.ok) {
-                    alert(await response.text());
-                    window.location = "/home";
-                  } else {
-                    alert(await response.text());
-                    location.reload();
-                  }
-                });
+                  })
+                  .then((response) => {
+                    console.log(response.data);
+                  });
               }}
             >
               <input
@@ -90,7 +100,7 @@ export default function Navlog() {
                   className="pl-1 text-blue-700 font-bold border-black cursor-pointer hover:text-black"
                   onClick={(e) => {
                     e.preventDefault();
-                    window.location = "/register"
+                    window.location = "/register";
                   }}
                 >
                   Register
@@ -110,8 +120,6 @@ export default function Navlog() {
     </>
   );
 }
-
-
 
 // {register && (
 //   <div>

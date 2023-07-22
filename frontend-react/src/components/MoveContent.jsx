@@ -17,7 +17,6 @@ export default function MoveContent() {
       word = myWord[tamp];
       word1 = word.slice(0, ++tamp1);
       const moveContent = moveContentRef.current;
-      console.log(moveContent);
       moveContent.textContent = word1;
       if (word1.length === word.length) {
         tamp++;
@@ -26,7 +25,6 @@ export default function MoveContent() {
     }
     setInterval(myMove, 300);
     return () => {
-      console.log("selesai");
       clearInterval(myMove);
     };
   }, []);

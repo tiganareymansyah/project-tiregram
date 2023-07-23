@@ -4,7 +4,6 @@ import Footer from "../../components/Footer";
 import Button from "../../components/Button";
 import MoveContent from "../../components/MoveContent";
 import { useState } from "react";
-import axios from "axios";
 
 export default function Navlog() {
   const [username, setUsername] = useState("");
@@ -50,33 +49,25 @@ export default function Navlog() {
               className="flex flex-col gap-7 mt-7 form-login"
               onSubmit={async (e) => {
                 e.preventDefault();
-                // fetch("http://localhost:3000/api/login", {
-                //   method: "POST",
-                //   headers: {
-                //     "Content-type": "application/json",
-                //   },
-                //   body: JSON.stringify({
-                //     username,
-                //     password,
-                //   }),
-                // }).then(async (response) => {
-                //   if (response.ok) {
-                //     alert(await response.text());
-                //     window.location = "/home";
-                //   } else {
-                //     alert(await response.text());
-                //     location.reload();
-                //   }
-                // });
-
-                axios
-                  .post("http://localhost:3000/api/login", {
+                fetch("http://localhost:3000/api/login", {
+                  method: "POST",
+                  credentials: "include",
+                  headers: {
+                    "Content-type": "application/json",
+                  },
+                  body: JSON.stringify({
                     username,
                     password,
-                  })
-                  .then((response) => {
-                    console.log(response.data);
-                  });
+                  }),
+                }).then(async (response) => {
+                  if (response.ok) {
+                    alert(await response.text());
+                    window.location = "/home";
+                  } else {
+                    alert(await response.text());
+                    location.reload();
+                  }
+                });
               }}
             >
               <input

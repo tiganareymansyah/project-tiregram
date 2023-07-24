@@ -1,6 +1,9 @@
+import { useState } from "react";
 import Navbar from "../../components/Navbar";
 
 export default function Profil() {
+  const [bio, setBio] = useState("");
+  const [openBio, setOpenBio] = useState(false);
   return (
     <>
       <Navbar />
@@ -28,13 +31,18 @@ export default function Profil() {
             </div>
           </div>
           <p className="font-bold">Tigana Reymansyah</p>
+          <p>{bio}</p>
           <div className="flex justify-center">
-            <button className="border-black font-bold bg-zinc-300 px-48 h-8 rounded-lg">
+            <button
+              className="border-black font-bold bg-zinc-300 px-48 h-8 rounded-lg"
+              onClick={() => setOpenBio(true)}
+            >
               Edit profil
             </button>
           </div>
         </div>
       </main>
+      {openBio && <div>Santuy</div>}
     </>
   );
 }

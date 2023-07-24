@@ -6,7 +6,7 @@ import MoveContent from "../../components/MoveContent";
 import { useState } from "react";
 
 export default function Navlog() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
@@ -56,7 +56,7 @@ export default function Navlog() {
                     "Content-type": "application/json",
                   },
                   body: JSON.stringify({
-                    username,
+                    email,
                     password,
                   }),
                 }).then(async (response) => {
@@ -71,13 +71,13 @@ export default function Navlog() {
               }}
             >
               <input
-                type="text"
-                placeholder="Username"
-                onChange={(e) => setUsername(e.target.value)}
+                type="email"
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
               <input
-                type="text"
+                type="password"
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
                 required

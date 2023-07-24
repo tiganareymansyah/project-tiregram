@@ -5,19 +5,21 @@ import Footer from "../../components/Footer";
 import Navabco from "../../components/Navabco";
 
 export default function Navreg() {
-    const [regUsername, setRegUsername] = useState("");
-    const [regPassword, setRegPassword] = useState("");
+  const [regUsername, setRegUsername] = useState("");
+  const [regGender, setRegGender] = useState("Male");
+  const [regEmail, setRegEmail] = useState("");
+  const [regPassword, setRegPassword] = useState("");
   return (
     <>
       <Navabco />
       <div className="div-bg">
         <main className="flex justify-center items-center gap-52">
-          <div className="bg-white px-5 py-5 rounded-2xl w-72 div-fw mt-20">
+          <div className="bg-white px-5 py-5 rounded-2xl w-72 div-fw mt-10">
             <h1 className="text-pink-600 text-2xl text-center tracking-widest font-serif">
               Register
             </h1>
             <form
-              className="flex flex-col gap-7 mt-7 form-login"
+              className="flex flex-col gap-5 mt-7 form-login"
               onSubmit={(e) => {
                 e.preventDefault();
                 fetch("http://localhost:3000/api/register", {
@@ -27,6 +29,8 @@ export default function Navreg() {
                   },
                   body: JSON.stringify({
                     regUsername,
+                    regGender,
+                    regEmail,
                     regPassword,
                   }),
                 }).then(async (response) => {
@@ -41,6 +45,23 @@ export default function Navreg() {
                 type="text"
                 placeholder="Username"
                 onChange={(e) => setRegUsername(e.target.value)}
+                required
+              />
+              <div className="flex flex-col gap-3">
+                <label className="text-zinc-400">Gender :</label>
+                <select
+                  value={regGender}
+                  onChange={(e) => setRegGender(e.target.value)}
+                  className="border border-pink-600 rounded-md text-zinc-700"
+                >
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <input
+                type="email"
+                placeholder="Email"
+                onChange={(e) => setRegEmail(e.target.value)}
                 required
               />
               <input

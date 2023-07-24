@@ -14,12 +14,12 @@ export async function tampilData(req, res) {
 }
 
 export async function loginUser(req, res) {
-  const cekUsername = await client.query(
-    `SELECT * FROM user_data WHERE username = '${req.body.username}'`
+  const cekEmail = await client.query(
+    `SELECT * FROM user_data WHERE email = '${req.body.email}'`
   );
-  if (cekUsername.rows.length > 0) {
-    if (await bcrypt.compare(req.body.password, cekUsername.rows[0].password)) {
-      const token = jwt.sign(cekUsername.rows[0], process.env.JWT_SECRET_KEY);
+  if (cekEmail.rows.length > 0) {
+    if (await bcrypt.compare(req.body.password, cekEmail.rows[0].password)) {
+      const token = jwt.sign(cekEmail.rows[0], process.env.JWT_SECRET_KEY);
       res.cookie("token", token, {
         httpOnly: true,
         secure: true,
@@ -39,7 +39,7 @@ export async function registerUser(req, res) {
   const salt = await bcrypt.genSalt();
   const hash = await bcrypt.hash(req.body.regPassword, salt);
   await client.query(
-    `INSERT INTO user_data (username, password) VALUES ('${req.body.regUsername}', '${hash}')`
+    `INSERT INTO user_data (username, gender, email, password) VALUES ('${req.body.regUsername}', '${req.body.regGender}', '${req.body.regEmail}', '${hash}')`
   );
   res.send("Register berhasil");
 }

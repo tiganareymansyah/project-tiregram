@@ -7,9 +7,12 @@ import { GrUserSettings } from "react-icons/gr";
 import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { FiLogOut } from "react-icons/fi";
+import { AiOutlineClose } from "react-icons/ai";
+import Button from "./Button";
 
 export default function Navbar() {
   const [setting, setSetting] = useState(false);
+  const [posting, setPosting] = useState(false);
 
   return (
     <>
@@ -38,7 +41,12 @@ export default function Navbar() {
           </li>
           <li>
             <NavLink>
-              <BsPlusSquare />
+              <BsPlusSquare
+                onClick={(e) => {
+                  e.preventDefault();
+                  setPosting(true);
+                }}
+              />
             </NavLink>
           </li>
           <li>
@@ -53,16 +61,56 @@ export default function Navbar() {
           </li>
         </ul>
       </header>
+      {posting && (
+        <>
+          <div className="div-post">
+            <AiOutlineClose
+              className="close-post"
+              onClick={(e) => {
+                e.preventDefault();
+                setPosting(false);
+              }}
+            />
+            <h1 className="text-center text-2xl tracking-wider font-serif mt-3">
+              Postingan
+            </h1>
+            <form
+              className="flex flex-col gap-5 p-6 mt-6"
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <textarea
+                cols="30"
+                rows="5"
+                placeholder="Isi caption postingan anda..."
+                className="border border-black rounded-md px-1"
+                onChange={(e) => sadas}
+              ></textarea>
+              <input type="file" onChange={(e) => sad} />
+              <div>
+                <Button name="Posting" />
+              </div>
+            </form>
+          </div>
+        </>
+      )}
       {setting && (
         <div className="div-setting">
           <ul>
             <li>
-              <NavLink to={"/profil"} className="flex items-center gap-1 py-2 hover:bg-gray-300 px-2.5">
+              <NavLink
+                to={"/profil"}
+                className="flex items-center gap-1 py-2 hover:bg-gray-300 px-2.5"
+              >
                 <CgProfile /> Profil
               </NavLink>
             </li>
             <li>
-              <NavLink to={"/"} className="flex items-center gap-1 py-2 hover:bg-gray-300 px-2.5">
+              <NavLink
+                to={"/"}
+                className="flex items-center gap-1 py-2 hover:bg-gray-300 px-2.5"
+              >
                 <FiLogOut /> Logout
               </NavLink>
             </li>

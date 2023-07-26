@@ -11,6 +11,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import Button from "./Button";
 
 export default function Navbar() {
+  const [caption, setCaption] = useState("");
+  const [imgPost, setImgPost] = useState(null);
   const [setting, setSetting] = useState(false);
   const [posting, setPosting] = useState(false);
 
@@ -76,8 +78,23 @@ export default function Navbar() {
             </h1>
             <form
               className="flex flex-col gap-5 p-6 mt-6"
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
+                const imgPostData = new FormData();
+                imgPostData.append("img-post", imgPost);
+                // imgPostData.append("caption", caption);
+                await fetch("http://localhost:3000/api/postinganuser", {
+                  method: "POST",
+                  headers: {
+                    "Content-type": "application/json",
+                  },
+                  body: imgPostData,
+                }).then(async (response) => {
+                  if (response.ok) {
+                    alert(await response.text());
+                    location.reload();
+                  }
+                });
               }}
             >
               <textarea
@@ -85,9 +102,12 @@ export default function Navbar() {
                 rows="5"
                 placeholder="Isi caption postingan anda..."
                 className="border border-black rounded-md px-1"
-                onChange={(e) => sadas}
+                onChange={(e) => setCaption(e.target.value)}
               ></textarea>
-              <input type="file" onChange={(e) => sad} />
+              <input
+                type="file"
+                onChange={(e) => setImgPost(e.target.files[0])}
+              />
               <div>
                 <Button name="Posting" />
               </div>

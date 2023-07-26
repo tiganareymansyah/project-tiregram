@@ -1,13 +1,18 @@
 import express from "express";
 import {
   loginUser,
+  postinganUser,
   registerUser,
   tampilData,
 } from "./routes/tiregram-route.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import multer from "multer";
 
 const app = express();
+
+const uploadPost = multer({ dest: "public/img-post" });
+const uploadProfil = multer({ dest: "public/img-profil" });
 
 app.use(
   cors({
@@ -23,5 +28,6 @@ app.use(express.static("public"));
 app.get("/api/tampildata", tampilData);
 app.post("/api/login", loginUser);
 app.post("/api/register", registerUser);
+app.post("/api/postinganuser", uploadPost.single("img-post"), postinganUser);
 
 app.listen(3000, () => console.log("Server berjalan..."));

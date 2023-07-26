@@ -81,13 +81,10 @@ export default function Navbar() {
               onSubmit={async (e) => {
                 e.preventDefault();
                 const imgPostData = new FormData();
+                imgPostData.append("caption", caption);
                 imgPostData.append("img-post", imgPost);
-                // imgPostData.append("caption", caption);
                 await fetch("http://localhost:3000/api/postinganuser", {
                   method: "POST",
-                  headers: {
-                    "Content-type": "application/json",
-                  },
                   body: imgPostData,
                 }).then(async (response) => {
                   if (response.ok) {

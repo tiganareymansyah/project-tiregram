@@ -45,10 +45,9 @@ export async function registerUser(req, res) {
 }
 
 export async function postinganUser(req, res) {
-  console.log(req.body);
-  // await client.query(
-  //   `INSERT INTO post_user (captions_post, images_post) VALUES ('${req.body.caption}', '${req.file.filename}')
-  //   `
-  // );
-  // res.send("Postingan berhasil");
+  await client.query(
+    `INSERT INTO post_user (captions_post, images_post) VALUES ('${req.body.caption}', '${req.file.filename}')
+    `
+  );
+  res.send("Postingan berhasil");
 }

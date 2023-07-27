@@ -1,6 +1,7 @@
 import express from "express";
 import {
   loginUser,
+  logoutUser,
   postinganUser,
   registerUser,
   tampilData,
@@ -29,5 +30,6 @@ app.get("/api/tampildata", tampilData);
 app.post("/api/login", loginUser);
 app.post("/api/register", registerUser);
 app.post("/api/postinganuser", uploadPost.single("img-post"), postinganUser);
+app.get("/api/logoutuser", logoutUser);
 
 app.listen(3000, () => console.log("Server berjalan..."));

@@ -86,6 +86,7 @@ export default function Navbar() {
                 await fetch("http://localhost:3000/api/postinganuser", {
                   method: "POST",
                   body: imgPostData,
+                  credentials: "include",
                 }).then(async (response) => {
                   if (response.ok) {
                     alert(await response.text());
@@ -125,8 +126,18 @@ export default function Navbar() {
             </li>
             <li>
               <NavLink
-                to={"/"}
                 className="flex items-center gap-1 py-2 hover:bg-gray-300 px-2.5"
+                onClick={async (e) => {
+                  e.preventDefault();
+                  await fetch("http://localhost:3000/api/logoutuser", {
+                    credentials: "include",
+                  }).then(async (response) => {
+                    if (response.ok) {
+                      alert(await response.text());
+                      window.location = "/";
+                    }
+                  });
+                }}
               >
                 <FiLogOut /> Logout
               </NavLink>

@@ -45,9 +45,16 @@ export async function registerUser(req, res) {
 }
 
 export async function postinganUser(req, res) {
+  const userLogin = jwt.verify(req.cookies.token, process.env.JWT_SECRET_KEY);
   await client.query(
-    `INSERT INTO post_user (captions_post, images_post) VALUES ('${req.body.caption}', '${req.file.filename}')
+    `INSERT INTO post_user (captions_post, images_post, id) VALUES ('${req.body.caption}', '${req.file.filename}', '${userLogin.id}')
     `
   );
   res.send("Postingan berhasil");
+}
+
+export async function logoutUser(_req, res) {
+  res.setHeader("Cache-Control", "no-store");
+  res.clearCookie("token");
+  res.send("Logout berhasil");
 }

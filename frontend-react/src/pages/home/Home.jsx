@@ -15,10 +15,10 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className="bg-home">
-        <main>{/* {data.map((d) => d.nama)} */}</main>
-        <footer></footer>
-      </div>
+      <main className="flex justify-center gap-60">
+        <div className="border border-black w-40 h-40">Postingan</div>
+        <div className="border border-black w-40 h-40">Saran teman</div>
+      </main>
     </>
   );
 }

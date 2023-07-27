@@ -5,14 +5,6 @@ import { client } from "../postgresql.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
-export async function tampilData(req, res) {
-  const userLogin = jwt.verify(req.cookies.token, process.env.JWT_SECRET_KEY);
-  const tampilUserPp = await client.query(
-    `SELECT username, url_images FROM user_data WHERE id = ${userLogin.id}`
-  );
-  res.send(tampilUserPp.rows[0]);
-}
-
 export async function loginUser(req, res) {
   const cekEmail = await client.query(
     `SELECT * FROM user_data WHERE email = '${req.body.email}'`
@@ -45,12 +37,25 @@ export async function registerUser(req, res) {
 }
 
 export async function postinganUser(req, res) {
-  const userLogin = jwt.verify(req.cookies.token, process.env.JWT_SECRET_KEY);
   await client.query(
-    `INSERT INTO post_user (captions_post, images_post, id) VALUES ('${req.body.caption}', '${req.file.filename}', '${userLogin.id}')
+    `INSERT INTO post_user (captions_post, images_post, id_user) VALUES ('${req.body.caption}', '${req.file.filename}', '${req.userLogin.id_user}')
     `
   );
   res.send("Postingan berhasil");
+}
+
+export async function changePpUser(req, res) {
+  await client.query(
+    `UPDATE user_data set profil_img = '${req.file.filename}' WHERE id_user = ${req.userLogin.id_user}`
+  );
+  res.send("Profil berhasil diubah");
+}
+
+export async function tampilPp(req, res) {
+  const tampilProfil = await client.query(
+    `SELECT profil_img from user_data WHERE id_user = ${req.userLogin.id_user}`
+  );
+  res.send(tampilProfil.rows[0]);
 }
 
 export async function logoutUser(_req, res) {

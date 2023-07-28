@@ -1,11 +1,12 @@
 import express from "express";
 import {
   changePpUser,
+  editProfile,
   loginUser,
   logoutUser,
   postinganUser,
   registerUser,
-  tampilPp,
+  user,
 } from "./routes/tiregram-route.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -40,8 +41,9 @@ app.use((req, _res, next) => {
 
 // Route
 app.post("/api/postinganuser", uploadPost.single("img-post"), postinganUser);
+app.get("/api/user", user);
 app.put("/api/changeppuser", uploadProfil.single("profil"), changePpUser);
-app.get("/api/tampilpp", tampilPp);
+app.put("/api/user", editProfile);
 app.get("/api/logoutuser", logoutUser);
 
 app.listen(3000, () => console.log("Server berjalan..."));

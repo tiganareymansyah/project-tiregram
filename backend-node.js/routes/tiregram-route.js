@@ -44,6 +44,15 @@ export async function postinganUser(req, res) {
   res.send("Postingan berhasil");
 }
 
+// Route profil
+
+export async function user(req, res) {
+  const user = await client.query(
+    `SELECT * from user_data WHERE id_user = ${req.userLogin.id_user}`
+  );
+  res.send(user.rows[0]);
+}
+
 export async function changePpUser(req, res) {
   await client.query(
     `UPDATE user_data set profil_img = '${req.file.filename}' WHERE id_user = ${req.userLogin.id_user}`
@@ -51,12 +60,14 @@ export async function changePpUser(req, res) {
   res.send("Profil berhasil diubah");
 }
 
-export async function tampilPp(req, res) {
-  const tampilProfil = await client.query(
-    `SELECT profil_img from user_data WHERE id_user = ${req.userLogin.id_user}`
+export async function editProfile(req, res) {
+  await client.query(
+    `UPDATE user_data SET username = '${req.body.username}', bio = '${req.body.bio}' WHERE id_user = ${req.userLogin.id_user}`
   );
-  res.send(tampilProfil.rows[0]);
+  res.send("Bio telah diperbarui");
 }
+
+// Route logout
 
 export async function logoutUser(_req, res) {
   res.setHeader("Cache-Control", "no-store");

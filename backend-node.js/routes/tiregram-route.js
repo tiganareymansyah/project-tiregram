@@ -67,6 +67,17 @@ export async function editProfile(req, res) {
   res.send("Bio telah diperbarui");
 }
 
+export async function editAccount(req, res) {
+  const salt = await bcrypt.genSalt();
+  const hash = await bcrypt.hash(req.body.newPassword, salt);
+  await client.query(
+    `UPDATE user_data SET email = '${req.body.newEmail}', password = '${hash}' WHERE id_user = ${req.userLogin.id_user}`
+  );
+  res.setHeader("Cache-Control", "no-store");
+  res.clearCookie("token");
+  res.send("Akun diperbarui silahkan login kembali");
+}
+
 // Route logout
 
 export async function logoutUser(_req, res) {

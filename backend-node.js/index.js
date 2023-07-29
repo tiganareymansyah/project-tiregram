@@ -1,6 +1,7 @@
 import express from "express";
 import {
   changePpUser,
+  editAccount,
   editProfile,
   loginUser,
   logoutUser,
@@ -44,6 +45,7 @@ app.post("/api/postinganuser", uploadPost.single("img-post"), postinganUser);
 app.get("/api/user", user);
 app.put("/api/changeppuser", uploadProfil.single("profil"), changePpUser);
 app.put("/api/user", editProfile);
+app.put("/api/editaccount", editAccount);
 app.get("/api/logoutuser", logoutUser);
 
 app.listen(3000, () => console.log("Server berjalan..."));

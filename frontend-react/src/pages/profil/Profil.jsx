@@ -6,7 +6,9 @@ import { AiOutlineClose } from "react-icons/ai";
 export default function Profil() {
   const [user, setUser] = useState();
   const [bio, setBio] = useState();
-  // const [editUser, setEditUser] = useState("")
+  const [editAccount, setEditAccount] = useState(false);
+  const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [imgProfil, setImgProfil] = useState("");
 
   useEffect(() => {
@@ -85,7 +87,17 @@ export default function Profil() {
               </button>
               <button
                 className="border-black font-bold bg-zinc-300 tracking-widest px-12 h-8 rounded-lg hover:bg-zinc-400 ease-in-out duration-200"
-                // onClick={() => }
+                onClick={(e) => {
+                  e.preventDefault();
+                  const konfirmasi = confirm(
+                    "Apakah anda yakin ingin memperbarui akun anda ?"
+                  );
+                  if (konfirmasi) {
+                    setEditAccount(true);
+                  } else {
+                    setEditAccount(false);
+                  }
+                }}
               >
                 Update Account
               </button>
@@ -137,6 +149,59 @@ export default function Profil() {
                 onChange={(e) => setBio(e.target.value)}
               ></textarea>
               <Button name="Save" />
+            </form>
+          </div>
+        </>
+      )}
+      {editAccount && (
+        <>
+          <AiOutlineClose
+            className="close-edit-account"
+            onClick={(e) => {
+              e.preventDefault();
+              setEditAccount(false);
+            }}
+          />
+          <div className="div-edit-account">
+            <form
+              className="flex flex-col gap-5 p-7 mt-3"
+              onSubmit={(e) => {
+                e.preventDefault();
+                fetch("http://localhost:3000/api/editaccount", {
+                  method: "PUT",
+                  headers: {
+                    "Content-type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    newEmail,
+                    newPassword,
+                  }),
+                  credentials: "include",
+                }).then(async (response) => {
+                  if (response.ok) {
+                    alert(await response.text());
+                    window.location = "/";
+                  }
+                });
+              }}
+            >
+              <input
+                type="email"
+                placeholder="New email"
+                required
+                className="rounded-md h-10 px-1"
+                onChange={(e) => setNewEmail(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="New password"
+                required
+                className="rounded-md h-10 px-1"
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+              <div className="mt-5">
+                <Button name="Save" />
+              </div>
             </form>
           </div>
         </>

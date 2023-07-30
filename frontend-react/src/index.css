@@ -211,7 +211,7 @@
   box-shadow: 2px 4px 4px 3px #666; /* kanan bawah atas kiri black */
   border-radius: 16px;
   width: 300px;
-  height: 240px;
+  height: 480px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -221,7 +221,7 @@
 .close-edit-account {
   font-size: 24px;
   position: absolute;
-  top: 180px;
+  top: 60px;
   left: 490px;
   z-index: 1;
 }

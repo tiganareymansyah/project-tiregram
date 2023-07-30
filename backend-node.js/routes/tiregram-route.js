@@ -71,11 +71,20 @@ export async function editAccount(req, res) {
   const salt = await bcrypt.genSalt();
   const hash = await bcrypt.hash(req.body.newPassword, salt);
   await client.query(
-    `UPDATE user_data SET email = '${req.body.newEmail}', password = '${hash}' WHERE id_user = ${req.userLogin.id_user}`
+    `UPDATE user_data SET username = '${req.body.newUsername}', gender = '${req.body.newGender}', email = '${req.body.newEmail}', password = '${hash}' WHERE id_user = ${req.userLogin.id_user}`
   );
   res.setHeader("Cache-Control", "no-store");
   res.clearCookie("token");
   res.send("Akun diperbarui silahkan login kembali");
+}
+
+export async function deleteAccountUser(req, res) {
+  await client.query(
+    `DELETE FROM user_data WHERE id_user = ${req.userLogin.id_user}`
+  );
+  res.setHeader("Cache-Control", "no-store");
+  res.clearCookie("token");
+  res.send("Akun berhasil dihapus");
 }
 
 // Route logout

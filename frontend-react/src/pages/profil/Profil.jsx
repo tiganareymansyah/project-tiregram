@@ -7,6 +7,8 @@ export default function Profil() {
   const [user, setUser] = useState();
   const [bio, setBio] = useState();
   const [editAccount, setEditAccount] = useState(false);
+  const [newUsername, setNewUsername] = useState("");
+  const [newGender, setNewGender] = useState("Male");
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [imgProfil, setImgProfil] = useState("");
@@ -173,6 +175,8 @@ export default function Profil() {
                     "Content-type": "application/json",
                   },
                   body: JSON.stringify({
+                    newUsername,
+                    newGender,
                     newEmail,
                     newPassword,
                   }),
@@ -185,6 +189,24 @@ export default function Profil() {
                 });
               }}
             >
+              <input
+                type="text"
+                placeholder="New username"
+                required
+                className="rounded-md h-10 px-1"
+                onChange={(e) => setNewUsername(e.target.value)}
+              />
+              <div className="flex flex-col gap-3">
+                <label className="text-zinc-400">New Gender :</label>
+                <select
+                  value={newGender}
+                  onChange={(e) => setNewGender(e.target.value)}
+                  className="rounded-md text-zinc-700"
+                >
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
               <input
                 type="email"
                 placeholder="New email"
@@ -201,6 +223,33 @@ export default function Profil() {
               />
               <div className="mt-5">
                 <Button name="Save" />
+              </div>
+              <p className="text-center">---------- Atau ----------</p>
+              <div className="flex justify-center">
+                <button
+                  className="bg-pink-600 text-white rounded-full px-5 h-10"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const konfirmasi = confirm(
+                      "Apakah anda yakin ingin menghapus account anda ?"
+                    );
+                    if (konfirmasi) {
+                      fetch("http://localhost:3000/api/deleteakun", {
+                        method: "DELETE",
+                        credentials: "include",
+                      }).then(async (response) => {
+                        if (response.ok) {
+                          alert(await response.text());
+                          window.location = "/";
+                        }
+                      });
+                    } else {
+                      location.reload();
+                    }
+                  }}
+                >
+                  Delete Account
+                </button>
               </div>
             </form>
           </div>

@@ -16,7 +16,17 @@ export default function Home() {
     <>
       <Navbar />
       <main className="flex justify-center gap-60">
-        <div className="border border-black w-40 h-40">Postingan</div>
+        <div className="border border-black w-40 h-40">
+          <div>
+            <img src="" />
+            <p>username</p>
+          </div>
+          <img src="" />
+          <div>
+            <p>like</p>
+            <p>comment</p>
+          </div>
+        </div>
         <div className="border border-black w-40 h-40">Saran teman</div>
       </main>
     </>

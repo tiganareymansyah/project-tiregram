@@ -8,6 +8,7 @@ import {
   logoutUser,
   postinganUser,
   registerUser,
+  tampilPostProfil,
   user,
 } from "./routes/tiregram-route.js";
 import cors from "cors";
@@ -48,6 +49,7 @@ app.put("/api/changeppuser", uploadProfil.single("profil"), changePpUser);
 app.put("/api/user", editProfile);
 app.put("/api/editaccount", editAccount);
 app.delete("/api/deleteakun", deleteAccountUser);
+app.get("/api/tampilpostuser", tampilPostProfil);
 app.get("/api/logoutuser", logoutUser);
 
 app.listen(3000, () => console.log("Server berjalan..."));

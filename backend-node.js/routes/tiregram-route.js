@@ -44,6 +44,13 @@ export async function postinganUser(req, res) {
   res.send("Postingan berhasil");
 }
 
+// Route home
+
+export async function tampilPost(req, res) {
+  const tampilPost = await client.query(`SELECT `);
+  res.send(tampilPost.rows[0]);
+}
+
 // Route profil
 
 export async function user(req, res) {
@@ -85,6 +92,13 @@ export async function deleteAccountUser(req, res) {
   res.setHeader("Cache-Control", "no-store");
   res.clearCookie("token");
   res.send("Akun berhasil dihapus");
+}
+
+export async function tampilPostProfil(req, res) {
+  const tampilPostProfil = await client.query(
+    `SELECT * FROM post_user WHERE id_user = ${req.userLogin.id_user}`
+  );
+  res.send(tampilPostProfil.rows[0]);
 }
 
 // Route logout

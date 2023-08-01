@@ -12,6 +12,7 @@ export default function Profil() {
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [imgProfil, setImgProfil] = useState("");
+  const [postUser, setPostUser] = useState();
 
   useEffect(() => {
     fetch("http://localhost:3000/api/user", {
@@ -21,6 +22,17 @@ export default function Profil() {
       .then((response) => response.json())
       .then((user) => setUser(user));
   }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/tampilpostuser", {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => setPostUser(data));
+  }, []);
+
+  console.log(postUser);
 
   return (
     <>

@@ -32,8 +32,6 @@ export default function Profil() {
       .then((data) => setPostUser(data));
   }, []);
 
-  console.log(postUser);
-
   return (
     <>
       <Navbar />

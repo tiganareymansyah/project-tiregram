@@ -36,19 +36,32 @@ export async function registerUser(req, res) {
   res.send("Register berhasil");
 }
 
+// Route home
+
+export async function saranTeman(req, res) {
+  const saranTeman = await client.query(
+    `SELECT username, profil_img FROM user_data WHERE id_user != ${req.userLogin.id_user}`
+  );
+  res.send(saranTeman.rows);
+}
+
+export async function tampilPost(_req, res) {
+  const tampilPost = await client.query(
+    `SELECT u.username, profil_img, p.captions_post, images_post FROM user_data u, post_user p WHERE u.id_user = p.id_user`
+  );
+  res.send(tampilPost.rows);
+}
+
+// Route chat
+
+// Route posting
+
 export async function postinganUser(req, res) {
   await client.query(
     `INSERT INTO post_user (captions_post, images_post, id_user) VALUES ('${req.body.caption}', '${req.file.filename}', '${req.userLogin.id_user}')
     `
   );
   res.send("Postingan berhasil");
-}
-
-// Route home
-
-export async function tampilPost(req, res) {
-  const tampilPost = await client.query(`SELECT `);
-  res.send(tampilPost.rows[0]);
 }
 
 // Route profil

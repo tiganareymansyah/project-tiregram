@@ -8,6 +8,8 @@ import {
   logoutUser,
   postinganUser,
   registerUser,
+  saranTeman,
+  tampilPost,
   tampilPostProfil,
   user,
 } from "./routes/tiregram-route.js";
@@ -43,13 +45,20 @@ app.use((req, _res, next) => {
 });
 
 // Route
-app.post("/api/postinganuser", uploadPost.single("img-post"), postinganUser);
-app.get("/api/user", user);
-app.put("/api/changeppuser", uploadProfil.single("profil"), changePpUser);
-app.put("/api/user", editProfile);
+// Route awal
 app.put("/api/editaccount", editAccount);
 app.delete("/api/deleteakun", deleteAccountUser);
-app.get("/api/tampilpostuser", tampilPostProfil);
 app.get("/api/logoutuser", logoutUser);
+
+// Route home
+app.get("/api/saranteman", saranTeman);
+app.get("/api/postuser", tampilPost);
+
+// Route profil
+app.get("/api/user", user);
+app.post("/api/postinganuser", uploadPost.single("img-post"), postinganUser);
+app.put("/api/changeppuser", uploadProfil.single("profil"), changePpUser);
+app.put("/api/user", editProfile);
+app.get("/api/tampilpostuser", tampilPostProfil);
 
 app.listen(3000, () => console.log("Server berjalan..."));
